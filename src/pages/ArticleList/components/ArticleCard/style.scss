@@ -1,0 +1,20 @@
+.card {
+  @media screen and (max-width: 769px) {
+    width: 100%;
+  }
+  width: 350px;
+  margin: 16px 0;
+  &__date-container {
+    display: flex;
+    &__icon {
+      margin-right: 10px;
+    }
+  }
+  &__title {
+    margin: 8px 0;
+    min-height: 130px;
+  }
+  &__button {
+    margin: 0 0 8px 10px;
+  }
+}

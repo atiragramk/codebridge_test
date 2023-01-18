@@ -1,0 +1,24 @@
+.list {
+  &__card-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  &__search {
+    margin-top: 16px;
+    border-bottom: 1px solid;
+    border-color: #a4a7b8bd;
+    &__bar {
+      @media screen and (max-width: 769px) {
+        width: 100%;
+      }
+      width: 350px;
+      margin: 8px 0;
+    }
+    &__text {
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+  }
+}
