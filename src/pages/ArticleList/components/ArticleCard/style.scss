@@ -12,7 +12,14 @@
   }
   &__title {
     margin: 8px 0;
-    min-height: 130px;
+    min-height: 120px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+  }
+  &__description {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    min-height: 80px;
   }
   &__button {
     margin: 0 0 8px 10px;

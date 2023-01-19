@@ -2,17 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { Article } from "../../../types";
 import { articleListFetch } from "../thunk/articleList";
+import { articleListKeywordsSet } from "../actions/articleList";
 
 export type ArticleListState = {
   loading: boolean;
   error: boolean | null;
   data: Article[] | [];
+  keywords: string[];
 };
 
 export const initialState: ArticleListState = {
   loading: true,
   error: null,
   data: [],
+  keywords: [""],
 };
 
 const name = "ARTICLE_LIST";
@@ -20,7 +23,7 @@ const name = "ARTICLE_LIST";
 const articleListSlice = createSlice({
   name,
   initialState,
-  reducers: {},
+  reducers: { articleListKeywordsSet },
   extraReducers(builder) {
     builder.addCase(articleListFetch.pending, (state) => {
       state.loading = true;
@@ -36,5 +39,8 @@ const articleListSlice = createSlice({
     });
   },
 });
+
+export const { articleListKeywordsSet: articleListKeywordsSetAction } =
+  articleListSlice.actions;
 
 export default articleListSlice.reducer;

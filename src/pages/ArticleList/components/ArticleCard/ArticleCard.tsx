@@ -10,6 +10,8 @@ import {
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
+import Highlighter from "react-highlight-words";
+
 import moment from "moment";
 import { Article } from "../../../../types";
 
@@ -17,9 +19,13 @@ import "./style.scss";
 
 type ArticleCardProps = {
   article: Article;
+  keywords: string[];
 };
 
-export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
+export const ArticleCard: React.FC<ArticleCardProps> = ({
+  article,
+  keywords,
+}) => {
   const date = moment(article.publishedAt).format("MMMM Do, YYYY");
   const shortDescription =
     article.summary.length > 100
@@ -46,10 +52,22 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
               {date}
             </Typography>
           </Box>
-          <Typography className="card__title" variant="h6">
+          {/* <Typography className="card__title" variant="h6">
             {article.title}
-          </Typography>
-          <Typography variant="body1">{shortDescription}</Typography>
+          </Typography> */}
+          <Box className="card__title">
+            <Highlighter
+              textToHighlight={article.title}
+              searchWords={keywords}
+            />
+          </Box>
+          <Box className="card__description">
+            <Highlighter
+              textToHighlight={shortDescription}
+              searchWords={keywords}
+            />
+          </Box>
+          {/* <Typography variant="body1">{shortDescription}</Typography> */}
         </CardContent>
       </CardActionArea>
       <Button size="small" className="card__button">
