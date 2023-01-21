@@ -1,4 +1,4 @@
-export type Article = {
+export interface Article {
   id: number;
   featured: boolean;
   title: string;
@@ -10,7 +10,11 @@ export type Article = {
   updatedAt: string;
   launches: LaunchEvent[];
   events: LaunchEvent[];
-};
+}
+
+export interface FilterArticles extends Article {
+  weight: number;
+}
 
 type LaunchEvent = {
   id: string;

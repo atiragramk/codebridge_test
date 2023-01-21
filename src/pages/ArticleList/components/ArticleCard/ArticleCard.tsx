@@ -11,20 +11,22 @@ import DateRangeIcon from "@mui/icons-material/DateRange";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import Highlighter from "react-highlight-words";
-
 import moment from "moment";
+
 import { Article } from "../../../../types";
 
 import "./style.scss";
 
 type ArticleCardProps = {
   article: Article;
-  keywords: string[];
+  keywords: string;
+  onOpen: (id: number) => void;
 };
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({
   article,
   keywords,
+  onOpen,
 }) => {
   const date = moment(article.publishedAt).format("MMMM Do, YYYY");
   const shortDescription =
@@ -34,12 +36,12 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
   return (
     <Card className="card">
-      <CardActionArea>
+      <CardActionArea onClick={() => onOpen(article.id)}>
         <CardMedia
           component="img"
           height="180"
           image={article.imageUrl}
-          alt=""
+          alt={article.title}
         />
         <CardContent>
           <Box className="card__date-container">
@@ -52,27 +54,28 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
               {date}
             </Typography>
           </Box>
-          {/* <Typography className="card__title" variant="h6">
-            {article.title}
-          </Typography> */}
           <Box className="card__title">
             <Highlighter
               textToHighlight={article.title}
-              searchWords={keywords}
+              searchWords={keywords.split(" ")}
+              autoEscape={true}
             />
           </Box>
           <Box className="card__description">
             <Highlighter
               textToHighlight={shortDescription}
-              searchWords={keywords}
+              searchWords={keywords.split(" ")}
             />
           </Box>
-          {/* <Typography variant="body1">{shortDescription}</Typography> */}
         </CardContent>
       </CardActionArea>
-      <Button size="small" className="card__button">
+      <Button
+        endIcon={<ArrowRightAltIcon fontSize="small" />}
+        size="small"
+        className="card__button"
+        onClick={() => onOpen(article.id)}
+      >
         Read more
-        <ArrowRightAltIcon fontSize="small" />
       </Button>
     </Card>
   );

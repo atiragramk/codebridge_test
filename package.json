@@ -52,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "@types/highlight-words-core": "^1.2.1",
     "@types/react-highlight-words": "^0.16.4"
   }
 }

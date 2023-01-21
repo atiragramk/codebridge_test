@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import {
   Box,
   Container,
   InputAdornment,
+  LinearProgress,
   TextField,
   Typography,
 } from "@mui/material";
@@ -14,10 +16,10 @@ import { AppDispatch } from "../../store";
 import { articleListStateSelector } from "./selectors/articleList";
 import { articleListFetch } from "./thunk/articleList";
 import { ArticleCard } from "./components/ArticleCard";
-
 import { articleListKeywordsSetAction } from "./reducer/articleList";
-import { Article } from "../../types";
-
+import { Article, FilterArticles } from "../../types";
+import { ErrorBoundary } from "../../components/ErrorBoundary";
+import { ErrorMessage } from "../../components/ErrorMessage";
 import "./style.scss";
 
 const ArticleList = () => {
@@ -25,6 +27,8 @@ const ArticleList = () => {
     articleListStateSelector
   );
   const dispatch: AppDispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(articleListFetch());
@@ -34,64 +38,100 @@ const ArticleList = () => {
     dispatch(articleListKeywordsSetAction(value));
   };
 
-  const handleFilterArticles = (
-    keywords: string[],
-    articles: Article[]
-  ): Article[] => {
-    const filtered = articles.filter(({ title, summary }) =>
-      keywords.some(
-        (keyword) =>
-          title.toLowerCase().includes(keyword) ||
-          summary.slice(0, 100).toLowerCase().includes(keyword)
-      )
-    );
-    return filtered.sort((a, b) => {
-      return (
-        filtered.findIndex(() =>
-          keywords.some((str) => b.title.includes(str))
-        ) -
-        filtered.findIndex(() => keywords.some((str) => a.title.includes(str)))
-      );
-    });
+  const handleArticleOpen = (id: number) => {
+    navigate(`/${id}`);
   };
-  const filteredArticles = handleFilterArticles(keywords, data);
+
+  const handleMatchCheck = (keywords: string, str: string, key?: string) => {
+    const keywordArr = keywords.split(" ");
+    if (key === "title") {
+      return keywordArr.some(
+        (keyword) =>
+          str.toLowerCase().includes(keyword.toLowerCase()) && keyword
+      );
+    } else {
+      return keywordArr.some(
+        (keyword) =>
+          str.toLowerCase().slice(0, 100).includes(keyword.toLowerCase()) &&
+          keyword
+      );
+    }
+  };
+
+  const handleFilterArticles = (
+    keywords: string,
+    articles: Article[]
+  ): FilterArticles[] => {
+    return articles.reduce((acc: FilterArticles[], currentValue) => {
+      if (handleMatchCheck(keywords, currentValue.title, "title")) {
+        acc = [...acc, { ...currentValue, weight: 2 }];
+      } else if (
+        handleMatchCheck(keywords, currentValue.summary) &&
+        handleMatchCheck(keywords, currentValue.title, "title")
+      ) {
+        acc = [...acc, { ...currentValue, weight: 1 }];
+      } else if (handleMatchCheck(keywords, currentValue.summary)) {
+        acc = [...acc, { ...currentValue, weight: 0.5 }];
+      }
+      return acc;
+    }, []);
+  };
+
+  const filteredArticles = handleFilterArticles(keywords, data).sort(
+    (a, b) => b.weight - a.weight
+  );
+
+  const displayArticles = keywords ? filteredArticles : data;
 
   return (
-    <Container maxWidth="lg">
-      <Box className="list__search">
-        <Typography className="list__search__text" marginTop={2}>
-          Filter by keywords
-        </Typography>
-        <TextField
-          placeholder="Search article"
-          size="small"
-          value={keywords.join(" ")}
-          onChange={(event) => handleFilterChange(event.target.value)}
-          className="list__search__bar"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-        <Typography className="list__search__text">
-          Results: {filteredArticles.length}
-        </Typography>
-      </Box>
-      <Box className="list__card-container">
-        {filteredArticles.map((article) => {
-          return (
-            <ArticleCard
-              keywords={keywords}
-              key={article.id}
-              article={article}
-            />
-          );
-        })}
-      </Box>
-    </Container>
+    <ErrorBoundary>
+      <Container maxWidth="lg">
+        {loading && (
+          <Box>
+            <LinearProgress />
+          </Box>
+        )}
+        {!loading && data.length > 0 && (
+          <>
+            <Box className="list__search">
+              <Typography className="list__search__text">
+                Filter by keywords
+              </Typography>
+              <TextField
+                placeholder="Search article"
+                size="small"
+                value={keywords}
+                onChange={(event) => handleFilterChange(event.target.value)}
+                className="list__search__bar"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <Typography className="list__search__text">
+                Results: {displayArticles.length}
+              </Typography>
+            </Box>
+            <Box className="list__card-container">
+              {displayArticles.map((article) => {
+                return (
+                  <ArticleCard
+                    keywords={keywords}
+                    key={article.id}
+                    article={article}
+                    onOpen={handleArticleOpen}
+                  />
+                );
+              })}
+            </Box>
+          </>
+        )}
+        {error && !loading && <ErrorMessage />}
+      </Container>
+    </ErrorBoundary>
   );
 };
 

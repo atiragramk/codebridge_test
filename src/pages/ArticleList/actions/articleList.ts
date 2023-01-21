@@ -5,5 +5,5 @@ export const articleListKeywordsSet = (
   state: ArticleListState,
   action: PayloadAction<string>
 ) => {
-  state.keywords = action.payload.split(" ");
+  state.keywords = action.payload;
 };

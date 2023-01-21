@@ -1,7 +1,7 @@
 .list {
   &__card-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
   }
   &__search {
@@ -9,7 +9,7 @@
     border-bottom: 1px solid;
     border-color: #a4a7b8bd;
     &__bar {
-      @media screen and (max-width: 769px) {
+      @media screen and (max-width: 830px) {
         width: 100%;
       }
       width: 350px;

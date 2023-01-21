@@ -8,14 +8,14 @@ export type ArticleListState = {
   loading: boolean;
   error: boolean | null;
   data: Article[] | [];
-  keywords: string[];
+  keywords: string;
 };
 
 export const initialState: ArticleListState = {
   loading: true,
   error: null,
   data: [],
-  keywords: [""],
+  keywords: "",
 };
 
 const name = "ARTICLE_LIST";
