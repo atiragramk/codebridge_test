@@ -1,7 +1,7 @@
 {
   "name": "codebridge_test",
   "version": "0.1.0",
-  "homepage": "https://github.com/atiragramk/codebridge_test",
+  "homepage": "https://atiragramk.github.io/codebridge_test/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
