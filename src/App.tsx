@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Suspense>
-        <Router>
+        <Router basename="/codebridge_test">
           <Routes>
             <Route path="/">
               <Route index element={<ArticleList />} />
