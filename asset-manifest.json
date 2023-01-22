@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.js": "/atiragramk/codebridge_test/static/js/main.ac3bb70b.js",
+    "static/css/185.d8450ee7.chunk.css": "/atiragramk/codebridge_test/static/css/185.d8450ee7.chunk.css",
+    "static/js/185.465a449c.chunk.js": "/atiragramk/codebridge_test/static/js/185.465a449c.chunk.js",
+    "static/css/982.f3de193e.chunk.css": "/atiragramk/codebridge_test/static/css/982.f3de193e.chunk.css",
+    "static/js/982.47aa9924.chunk.js": "/atiragramk/codebridge_test/static/js/982.47aa9924.chunk.js",
+    "static/css/801.b46f2d28.chunk.css": "/atiragramk/codebridge_test/static/css/801.b46f2d28.chunk.css",
+    "static/js/801.a31d416b.chunk.js": "/atiragramk/codebridge_test/static/js/801.a31d416b.chunk.js",
+    "static/js/787.9f514cf4.chunk.js": "/atiragramk/codebridge_test/static/js/787.9f514cf4.chunk.js",
+    "static/js/681.3821fb04.chunk.js": "/atiragramk/codebridge_test/static/js/681.3821fb04.chunk.js",
+    "static/js/520.a479ff88.chunk.js": "/atiragramk/codebridge_test/static/js/520.a479ff88.chunk.js",
+    "static/js/599.211a5ed1.chunk.js": "/atiragramk/codebridge_test/static/js/599.211a5ed1.chunk.js",
+    "static/media/error.gif": "/atiragramk/codebridge_test/static/media/error.d9aa7b1a785ebcbec41f.gif",
+    "static/media/404.gif": "/atiragramk/codebridge_test/static/media/404.58a1539bd10640395b89.gif",
+    "index.html": "/atiragramk/codebridge_test/index.html",
+    "main.ac3bb70b.js.map": "/atiragramk/codebridge_test/static/js/main.ac3bb70b.js.map",
+    "185.d8450ee7.chunk.css.map": "/atiragramk/codebridge_test/static/css/185.d8450ee7.chunk.css.map",
+    "185.465a449c.chunk.js.map": "/atiragramk/codebridge_test/static/js/185.465a449c.chunk.js.map",
+    "982.f3de193e.chunk.css.map": "/atiragramk/codebridge_test/static/css/982.f3de193e.chunk.css.map",
+    "982.47aa9924.chunk.js.map": "/atiragramk/codebridge_test/static/js/982.47aa9924.chunk.js.map",
+    "801.b46f2d28.chunk.css.map": "/atiragramk/codebridge_test/static/css/801.b46f2d28.chunk.css.map",
+    "801.a31d416b.chunk.js.map": "/atiragramk/codebridge_test/static/js/801.a31d416b.chunk.js.map",
+    "787.9f514cf4.chunk.js.map": "/atiragramk/codebridge_test/static/js/787.9f514cf4.chunk.js.map",
+    "681.3821fb04.chunk.js.map": "/atiragramk/codebridge_test/static/js/681.3821fb04.chunk.js.map",
+    "520.a479ff88.chunk.js.map": "/atiragramk/codebridge_test/static/js/520.a479ff88.chunk.js.map",
+    "599.211a5ed1.chunk.js.map": "/atiragramk/codebridge_test/static/js/599.211a5ed1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.ac3bb70b.js"
+  ]
+}
