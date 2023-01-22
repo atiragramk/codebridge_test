@@ -35,7 +35,7 @@ const ArticleList = () => {
   }, [dispatch]);
 
   const handleFilterChange = (value: string) => {
-    dispatch(articleListKeywordsSetAction(value));
+    dispatch(articleListKeywordsSetAction(value.trimStart()));
   };
 
   const handleArticleOpen = (id: number) => {
@@ -43,17 +43,14 @@ const ArticleList = () => {
   };
 
   const handleMatchCheck = (keywords: string, str: string, key?: string) => {
-    const keywordArr = keywords.split(" ");
+    const keywordArr = keywords.split(" ").filter((keyword) => keyword);
     if (key === "title") {
-      return keywordArr.some(
-        (keyword) =>
-          str.toLowerCase().includes(keyword.toLowerCase()) && keyword
+      return keywordArr.some((keyword) =>
+        str.toLowerCase().includes(keyword.toLowerCase())
       );
     } else {
-      return keywordArr.some(
-        (keyword) =>
-          str.toLowerCase().slice(0, 100).includes(keyword.toLowerCase()) &&
-          keyword
+      return keywordArr.some((keyword) =>
+        str.toLowerCase().slice(0, 100).includes(keyword.toLowerCase())
       );
     }
   };
@@ -115,6 +112,11 @@ const ArticleList = () => {
                 Results: {displayArticles.length}
               </Typography>
             </Box>
+            {!displayArticles.length && (
+              <Typography className="list__search__result-text">
+                Sorry I couldn't find anything{" "}
+              </Typography>
+            )}
             <Box className="list__card-container">
               {displayArticles.map((article) => {
                 return (

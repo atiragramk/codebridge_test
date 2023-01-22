@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const ArticleList = lazy(() => import("./pages/ArticleList"));
 const ArticleListItem = lazy(() => import("./pages/ArticleListItem"));
+const Page404 = lazy(() => import("./pages/404"));
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
             <Route path="/">
               <Route index element={<ArticleList />} />
               <Route path="/:articleId" element={<ArticleListItem />} />
+              <Route path="*" element={<Page404 />} />
             </Route>
           </Routes>
         </Router>
